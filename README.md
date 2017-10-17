@@ -7,6 +7,12 @@ A jQuery plugin for smooth scrolling to next section on click of a button!
 
 ## Usage
 
+
+#### Install using NPM (optional)
+```
+npm install section-scroller
+```
+
 #### Include
 
 ```html
