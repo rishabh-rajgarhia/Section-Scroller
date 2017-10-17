@@ -2,7 +2,7 @@
 
 A jQuery plugin for smooth scrolling to next section on click of a button!
 
-### [Demo](#)
+### [Demo](https://rishabh-rajgarhia.github.io/Section-Scroller/demo/demo.html)
 
 
 ## Usage
