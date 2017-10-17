@@ -1,0 +1,41 @@
+/*--- section scroller button css - you can use the same in your project or modify as per your requirements	---*/
+		
+#section-scroller-button {
+	position: fixed;
+	right: 60px;
+	bottom: 50px;
+	height: 60px;
+	width: 60px;
+	border-radius: 50%;
+	background-color: #ff9800;
+	color: white;
+	z-index: 10;
+	cursor: pointer;
+	-webkit-box-shadow: 0 8px 42px -10px rgba(0, 0, 0, 0.85);
+	box-shadow: 0 8px 42px -10px rgba(0, 0, 0, 0.85);
+}
+
+.caret {
+	position: absolute;
+	top: 0;
+	width: 5px;
+	height: 5px;
+	display: inline;
+	margin: 22px 23px;
+	padding: 3px;
+	border-bottom: solid 3px #fff;
+	border-right: solid 3px #fff;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	-webkit-transition: all 0.6s;
+	-o-transition: all 0.6s;
+	transition: all 0.6s;
+}
+
+#section-scroller-button.rotate .caret {
+	top: 4px;
+	-webkit-transform: rotate(-135deg);
+	-ms-transform: rotate(-135deg);
+	transform: rotate(-135deg);
+}
