@@ -1,0 +1,25 @@
+{
+	"name": "Section-Scroller",
+	"version": "1.0.0",
+	"description": "A jQuery plugin for smooth scrolling to next section on click of a button!",
+	"main": "sectionScroller.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/rishabh-rajgarhia/Section-Scroller.git"
+	},
+	"keywords": [
+		"jquery-plugin",
+		"ecosystem:jquery",
+		"section",
+		"step",
+		"scroll",
+		"snap"
+	],
+	"dependencies": {
+		"jquery": ">=1.6"
+	},
+	"author": "Rishabh Rajgarhia",
+	"license": "MIT",
+	"demo": "https://rishabh-rajgarhia.github.io/Section-Scroller/demo/demo.html",
+	"homepage": "https://github.com/rishabh-rajgarhia/Section-Scroller"
+}
