@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="A jQuery plugin for smooth scrolling to next section on click of a button.">
+	<meta name="author" content="Rishabh Rajgarhia">
+	<meta name="keywords" content="jQuery, section, scroll, smooth, plugin, click, button">
+
+	<title>Section Scroller Demo</title>
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		
+		body {
+			font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+			font-size: 1rem;
+			font-weight: normal;
+			line-height: 1.5;
+		}
+		
+		h1,	h2,	h3,	h4,	h5,	h6 {
+			margin-top: 0;
+			margin-bottom: 0.5rem;
+			font-family: inherit;
+			font-weight: 500;
+			line-height: 1.1;
+			color: inherit;
+		}
+		
+		h1 {
+			font-size: 2.5rem;
+		}
+		
+		h2 {
+			font-size: 2rem;
+		}
+		
+		h3 {
+			font-size: 1.75rem;
+		}
+		
+		h4 {
+			font-size: 1.5rem;
+		}
+		
+		h5 {
+			font-size: 1.25rem;
+		}
+		
+		h6 {
+			font-size: 1rem;
+		}
+		
+		.lead {
+			font-size: 1.25rem;
+			font-weight: 300;
+		}
+		
+		.display-1 {
+			font-size: 6rem;
+			font-weight: 300;
+			line-height: 1.1;
+		}
+		
+		.display-2 {
+			font-size: 5.5rem;
+			font-weight: 300;
+			line-height: 1.1;
+		}
+		
+		.display-3 {
+			font-size: 4.5rem;
+			font-weight: 300;
+			line-height: 1.1;
+		}
+		
+		.display-4 {
+			font-size: 3.5rem;
+			font-weight: 300;
+			line-height: 1.1;
+		}
+		
+		.fw-300 {
+			font-weight: 300;
+		}
+		
+		.fw-400 {
+			font-weight: 400;
+		}
+		
+		p {
+			margin-top: 0;
+			margin-bottom: 16px;
+			font-size: 16px;
+		}
+		
+		code {
+			max-width: 530px;
+			margin: 0 auto;
+			text-align: left;
+			display: block;
+			font-family: Monaco, monospace;
+			color: #fff;
+			padding: 20px;
+			font-size: 18px;
+			border-radius: 4px;
+		}
+		
+		code>span {
+			display: block;
+			padding: 0px;
+		}
+		
+		code.wider {
+			max-width: 1050px;
+		}
+		
+		code.primary {
+			background: #d83a30;
+		}
+		
+		code.secondary {
+			background: #7c1f8c;
+		}
+		
+		.full-height {
+			display: table;
+			width: 100%;
+			height: 100%;
+			text-align: center;
+		}
+		
+		.content-wrapper {
+			display: table-cell;
+			vertical-align: middle;
+			padding: 20px;
+		}
+		
+		#section-1 {
+			background-color: #673AB7;
+			color: #fff;
+		}
+		
+		#section-2 {
+			background-color: #F44336;
+			color: #fff;
+		}
+		
+		#section-3 {
+			background-color: #9C27B0;
+			color: #fff;
+		}
+		
+		#section-4 {
+			background-color: #009688;
+			color: #fff;
+		}
+		
+		.tooltip {
+			position: fixed;
+			right: 145px;
+			bottom: 56px;
+			width: 340px;
+			padding: 10px;
+			font-size: 22px;
+			background-color: #000;
+			color: #fff;
+			text-align: center;
+			border-radius: 4px;
+			opacity: 0;
+			z-index: 10;
+			-webkit-transition: all 0.6s;
+			-o-transition: all 0.6s;
+			transition: all 0.6s;
+		}
+		
+		.tooltip:after {
+			content: "";
+			position: absolute;
+			left: 100%;
+			top: 50%;
+			margin-top: -10px;
+			border-bottom: 10px solid transparent;
+			border-top: 10px solid transparent;
+			border-left: 10px solid #000;
+		}
+		
+		a {
+			color: #fff;
+		}
+		
+		a:hover {
+			color: #ff9800;
+		}
+		
+		a.custom {
+			display: inline-block;
+			margin-bottom: 0;
+			font-size: 24px;
+			font-weight: normal;
+			line-height: 1.25;
+			color: #fff;
+			text-align: center;
+			white-space: nowrap;
+			vertical-align: middle;
+			-ms-touch-action: manipulation;
+			touch-action: manipulation;
+			cursor: pointer;
+			text-decoration: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			background-image: none;
+		}
+		
+		a.custom:hover {
+			color: #fff;
+		}
+		
+		a.custom > img {
+			width: 28px;
+			height: 28px;
+			vertical-align: bottom;
+			margin-right: 8px;
+		}
+		
+		/*--- section scroller button css - you can use the same in your project or modify as per your requirements	---*/
+		
+		#section-scroller-button {
+			position: fixed;
+			right: 60px;
+			bottom: 50px;
+			height: 60px;
+			width: 60px;
+			border-radius: 50%;
+			background-color: #ff9800;
+			color: white;
+			z-index: 10;
+			cursor: pointer;
+			-webkit-box-shadow: 0 8px 42px -10px rgba(0, 0, 0, 0.85);
+			box-shadow: 0 8px 42px -10px rgba(0, 0, 0, 0.85);
+		}
+		
+		.caret {
+			position: absolute;
+			top: 0;
+			width: 5px;
+			height: 5px;
+			display: inline;
+			margin: 22px 23px;
+			padding: 3px;
+			border-bottom: solid 3px #fff;
+			border-right: solid 3px #fff;
+			-webkit-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+			-webkit-transition: all 0.6s;
+			-o-transition: all 0.6s;
+			transition: all 0.6s;
+		}
+		
+		#section-scroller-button.rotate .caret {
+			top: 4px;
+			-webkit-transform: rotate(-135deg);
+			-ms-transform: rotate(-135deg);
+			transform: rotate(-135deg);
+		}
+
+	</style>
+	<script src="jquery.min.js"></script>
+	<script src="../sectionScroller.min.js"></script>
+	<script>
+		$(function() { // dom ready
+
+			$(".section-scroll").sectionScroller({
+				scrollerButton: "#section-scroller-button",
+				scrollType: "swing",
+				scrollDuration: 900,
+			});
+
+			// for the tooltip
+			var $tooltip = $(".tooltip");
+			setTimeout(function() {
+				$tooltip.css("opacity", "1");
+				$("#section-scroller-button").one("click", function() {
+					$tooltip.hide();
+				})
+			}, 500);
+
+		});
+
+	</script>
+</head>
+
+<body>
+	<div class="full-height section-scroll" id="section-1">
+		<div class="content-wrapper">
+			<h1 class="display-2">Section Scroller</h1>
+			<h2 class="fw-400" style="margin-bottom: 54px;">A jQuery plugin for smooth scrolling to next section on click of a button!</h2>
+			<a class="custom" href="https://github.com/rishabh-rajgarhia/Section-Scroller/archive/master.zip" style="margin-right: 48px;"><img src="download.png" alt="Download">Download Zip</a>
+			<a class="custom" href="https://github.com/rishabh-rajgarhia/Section-Scroller"><img src="GitHub.png" alt="View on GitHub">View on GitHub</a>
+		</div>
+	</div>
+
+	<div class="full-height section-scroll" id="section-2">
+		<div class="content-wrapper">
+			<h2 class="display-2" style="margin-bottom: 48px;">Easy to Use</h2>
+			<code class="primary">
+<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;section-scroll`&quot;&gt;Content...&lt;/div&gt;</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;section-scroll`&quot;&gt;Content...&lt;/div&gt;</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;section-scroll`&quot;&gt;Content...&lt;/div&gt;</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;...</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id=&quot;section-scroller-button&quot;&gt;</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i class=&quot;caret&quot;&gt;&lt;/i&gt;</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</span>
+            </code>
+			<br>
+			<code class="primary">
+<span>$(document).ready(function () {</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;$(".section-scroll").sectionScroller({</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Options</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scrollerButton: "#section-scroller-button"</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;});</span>
+<span>});</span>
+            </code>
+		</div>
+	</div>
+
+	<div class="full-height section-scroll" id="section-3">
+		<div class="content-wrapper">
+			<h2 class="display-4" style="margin-bottom: 48px;">Easily extend with jQuery Easing Plugin</h2>
+			<code class="secondary wider">
+<span>&lt;script&gt;</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;$(document).ready(function () {</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(&quot;.section-scroll&quot;).sectionScroller({</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scrollType: &quot;easeInOutExpo&quot;, // requires jQuery Easing Plugin</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scrollDuration: 1500</span>
+<span>&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</span>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;});</span>
+<span>&lt;/script&gt;</span>
+<span>&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js&quot;&gt;&lt;/script&gt;</span>
+<span>&lt;script src=&quot;sectionscroller.min.js&quot;&gt;&lt;/script&gt;</span>
+		  	</code>
+		</div>
+	</div>
+
+	<div class="full-height section-scroll" id="section-4">
+		<div class="content-wrapper">
+			<h2 class="display-2" style="margin-bottom: 36px;">Last Section</h2>
+			<h3 class="fw-400" style="margin-bottom: 64px;">On reaching the last section, a class is added to the scroller button for applying custom css like rotating the button</h3>
+			<h2 class="display-4 fw-400">Checkout the <a href="https://github.com/rishabh-rajgarhia/Section-Scroller" alt="docs">docs</a> for all the options</h2>
+		</div>
+	</div>
+
+	<div class="tooltip">
+		Click for scrolling to next section
+	</div>
+
+	<!-- scroller button -->
+	<div id="section-scroller-button">
+		<i class="caret"></i>
+	</div>
+	<!-- /scroller button -->
+</body>
+
+</html>
