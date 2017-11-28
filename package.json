@@ -1,6 +1,6 @@
 {
 	"name": "section-scroller",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "A jQuery plugin for smooth scrolling to next section on click of a button!",
 	"main": "sectionScroller.js",
 	"repository": {
