@@ -85,11 +85,9 @@ For setting offset for individual sections, use `data-scroll-offset` HTML Data A
 ```html
 <div class="section-scroll" data-scroll-offset="30">Content...</div>
 ```
-**Extra Options Available Inside Callbacks**
+**Extra Option(s) Available Inside Callbacks**
 
-`this.scrollToElementIndex` (Number) - index of the destination section - starting with 0 by default.  
-`this.elementOffsetTops` (Array) - offet top of all the sections.  
-`this.dataScrollOffsets` (Array) - offset provided in the HTML Data Attribute(data-scroll-offset) if any.  
+`this.scrollToElementIndex` (Number) - index of the destination section - starting with 0 by default.   
 
 
 ## License
