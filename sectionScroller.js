@@ -53,6 +53,7 @@
 
 		// scroller button
 		this.scrollerButton = $(this.options.scrollerButton);
+
 		// class added to the scroller button(to rotate the scroller button direction, etc.) when the last section or the bottom of page is reached
 		this.scrollerButtonRotateClass = this.options.scrollerButtonRotateClass;
 
@@ -89,41 +90,26 @@
 		init: function () {
 			var that = this;
 
-			this.calculateElementOffets(this);
-			$window.resize(function () {
-				that.calculateElementOffets(that)
-			});
-
 			this.scrollerButton.on("click", function (event) {
 				that.scrollToNextElement(that);
 				event.preventDefault();
 			});
 
 			this.scrollerButtonRotateClassHandler(this);
+
 			$window.scroll(function () {
 				that.scrollerButtonRotateClassHandler(that)
 			});
-		},
-
-		calculateElementOffets: function (that) {
-			that.elementOffsetTops = [];
-			that.dataScrollOffsets = [];
-
-			that.elements.each(function () {
-				that.elementOffsetTops.push($(this).offset().top);
-				that.dataScrollOffsets.push(Number($(this).data("scroll-offset")) ? Number($(this).data("scroll-offset")) : 0);
-			});
-
 		},
 
 		scrollToNextElement: function (that) {
 			var index = 0;
 			var offsetAdjustment = that.offset + getFixedNavbarHeight(that.fixedNavbar);
 
-			while (parseInt($window.scrollTop() + 2) >= parseInt(that.elementOffsetTops[index] - offsetAdjustment) && index < that.elementOffsetTops.length)
+			while (index < that.elements.length && Math.round($window.scrollTop()) >= Math.round($(that.elements[index]).offset().top - offsetAdjustment))
 				index++;
 
-			if (index >= that.elementOffsetTops.length || checkBottom())
+			if (index >= that.elements.length || checkBottom())
 				index = 0;
 
 			that.scrollToElementIndex = index;
@@ -132,7 +118,7 @@
 			that.options.onScrollStart.call(that);
 
 			$('html, body').stop().animate({
-				scrollTop: parseInt(that.elementOffsetTops[index] - offsetAdjustment) + parseInt(that.dataScrollOffsets[index])
+				scrollTop: Math.round($(that.elements[index]).offset().top - offsetAdjustment) + Math.round(Number($(that.elements[index]).data("scroll-offset")) ? Number($(that.elements[index]).data("scroll-offset")) : 0)
 			}, that.scrollDuration, that.scrollType).promise().done(function () {
 				that.options.onScrollEnd.call(that); // callback function on end of the scrolling
 			});
@@ -141,11 +127,10 @@
 
 		scrollerButtonRotateClassHandler: function (that) {
 			var offsetAdjustment = that.offset + getFixedNavbarHeight(that.fixedNavbar);
-			var rotateClassOffset = parseInt($(that.elements[that.elements.length - 1]).outerHeight() / 3);
 
 			if (checkBottom())
 				addClass(that.scrollerButton, that.scrollerButtonRotateClass);
-			else if (parseInt($window.scrollTop()) >= parseInt(that.elementOffsetTops[that.elementOffsetTops.length - 1] - offsetAdjustment - rotateClassOffset))
+			else if (Math.round($window.scrollTop()) >= Math.round($(that.elements[that.elements.length - 1]).offset().top - offsetAdjustment))
 				addClass(that.scrollerButton, that.scrollerButtonRotateClass);
 			else
 				removeClass(that.scrollerButton, that.scrollerButtonRotateClass);
