@@ -1,6 +1,6 @@
 # Section Scroller
 
-A jQuery plugin for smooth scrolling to next section on click of a button!
+Lightweight, cross-browser and easy to use jQuery plugin for smooth scrolling to next section on click of a button!
 
 ### [Demo](https://rishabh-rajgarhia.github.io/Section-Scroller/demo/demo.html)
 
